@@ -1,0 +1,12 @@
+[package]
+name = "thaumcraft4_aspects_connection_helper"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+clap = { version = "4.5.47", features = ["cargo", "derive"] }
+clap_derive = "4.5.47"
+ego-tree = "0.10.0"
+snafu = "0.8.7"
+sqlx = { version = "0.8.6", features = ["runtime-tokio", "sqlite", "any"] }
+tokio = { version = "1.47.1", features = ["fs", "macros", "io-util", "rt-multi-thread"] }
