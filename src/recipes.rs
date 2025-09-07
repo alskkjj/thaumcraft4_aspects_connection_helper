@@ -46,7 +46,8 @@ pub struct Element {
 
 impl Element {
     pub fn pretty_print(&self) -> String {
-        format!("{},{},{}", self.name, self.belongs_to_mod.clone().unwrap_or("<>".to_string()), self.base_value)
+        format!("name: {}, belongs_to_mod: {}, base_value: {}",
+            self.name, self.belongs_to_mod.clone().unwrap_or("<>".to_string()), self.base_value)
     }
 }
 

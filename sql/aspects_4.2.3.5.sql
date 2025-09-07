@@ -1,3 +1,6 @@
+-- name: the element's official name.
+-- belongs_to_mod: nullable string.
+-- base_value: default is 1.0, used in weight algorithm.
 INSERT INTO elements(name, belongs_to_mod, base_value) VALUES('Aer', 'Thaumcraft', 1.0);
 INSERT INTO elements(name, belongs_to_mod, base_value) VALUES('Alienis', 'Thaumcraft', 1.0);
 INSERT INTO elements(name, belongs_to_mod, base_value) VALUES('Aqua', 'Thaumcraft', 1.0);
@@ -58,6 +61,8 @@ INSERT INTO elements(name, belongs_to_mod) VALUES('Gula', 'Forbidden Magic');
 INSERT INTO elements(name, belongs_to_mod) VALUES('Desidia', 'Forbidden Magic');
 INSERT INTO elements(name, belongs_to_mod) VALUES('Invidia', 'Forbidden Magic');
 
+
+-- recipes: the result element and its two components.
 INSERT INTO recipes(name, component_a, component_b) VALUES('Alienis', 'Vacuos', 'Tenebrae');
 INSERT INTO recipes(name, component_a, component_b) VALUES('Arbor', 'Aer', 'Herba');
 INSERT INTO recipes(name, component_a, component_b) VALUES('Auram', 'Praecantatio', 'Aer');
@@ -113,6 +118,9 @@ INSERT INTO recipes(name, component_a, component_b) VALUES('Invidia', 'Sensus', 
 
 
 
+-- elements_holding: check your table in game for realtime number.
+-- `1e999` here means infinity in sqlite3, so the algorithm treat all elements equally at `quantity level`.
+-- the better solution is OpenCV or create a new Minecraft mod.
 INSERT INTO elements_holding(name, num) VALUES('Aer', 1e999);
 INSERT INTO elements_holding(name, num) VALUES('Alienis', 1e999);
 INSERT INTO elements_holding(name, num) VALUES('Aqua', 1e999);

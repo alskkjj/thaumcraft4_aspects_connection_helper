@@ -23,21 +23,29 @@ struct Cli {
 
 #[derive(Subcommand)]
 enum Commands {
+    /// Crack the aspects into its base aspects. Used to descript the base elements of a Node.
     Crack {
         aspects: Vec<String>,
     },
+    /// Connect two elements with `steps_n` steps
     TryConnect {
         from: String,
         to: String,
         steps_n: usize,
     },
+    /// List the elements in `Database`
     ListElements,
+    /// List the recipes in `Database`
     ListRecipes,
+    /// List the mods in `Database`
     ListMods,
+    /// The `Aspects Connecting Algorithm` can calculate a `recommendation rate` by their
+    /// quantities. This is the way let you input each one manually.
     ChangeElementHolding {
         element_name: String,
         change_to_num: usize,
     },
+    /// List the elements currently holding.
     ListElementsHolding,
 }
 
@@ -123,7 +131,7 @@ async fn main() {
             let mut ret = HashMap::new();
 
             for aspect in &mp {
-                for elee in 
+                for elee in
                     pathes::crack_element_until_primary(dao.clone(), aspect.0)
                         .await.expect("crack element until primary") {
                             insert_or_add(&mut ret, elee.0, elee.1 * aspect.1);
