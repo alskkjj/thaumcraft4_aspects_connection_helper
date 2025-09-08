@@ -20,11 +20,11 @@ For details, see the `stage1.sql` for tables' defination, and `aspects_4.2.3.5.s
 
 For help: cargo run --release -- --help
 
-For the help of a sub-command: cargo run --release -- crack --help
+For the help of a sub-command, for example, crack: cargo run --release -- crack --help
 
 You can also copy the binary runnable file out from target directory, with database `aspects.sqlite3`.
 
-# About the `Aspects Connecting Algorithm`:
+# About the `Aspects Recommendation Algorithm`:
 
     It will calculate the recommendation rate for each path, the weight formulas:
 
