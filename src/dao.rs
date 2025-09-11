@@ -48,6 +48,15 @@ impl DAO {
         let database = AnyPool::connect(url)
             .await
             .expect("Database {url} connection failed.");
+        let _a = sqlx::raw_sql(
+            "PRAGMA foreign_keys = ON"
+        )
+            .execute(&database)
+            .await
+            .expect("The sqlite3's PRAGMA opened failed.");
+
+        #[cfg(debug_assertions)]
+        eprintln!("{_a:?}");
         Self {
             database
         }
