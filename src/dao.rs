@@ -216,6 +216,22 @@ impl DAO {
             }
         }
 
+    pub async fn get_primary_elements(&self, ) -> Result<Vec<ElementHandle>, Errors> {
+        let res = sqlx::query(
+            "SELECT elements.name AS ename FROM elements LEFT JOIN recipes ON elements.name=recipes.name WHERE recipes.name IS NULL"
+        )
+            .fetch_all(&self.database)
+            .await?;
+
+        let mut v = vec![];
+        for x in res.into_iter() {
+            let a = x.try_get::<String, _>(0)?;
+            v.push(ElementHandle::from(a));
+        }
+
+        Ok(v)
+    }
+
     pub async fn is_primary_element(&self, handle: &ElementHandle) -> Result<bool, Errors> {
         let res = sqlx::query(
             "SELECT count(*) as num FROM recipes WHERE name=$1"

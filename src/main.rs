@@ -23,7 +23,7 @@ struct Cli {
 
 #[derive(Subcommand)]
 enum Commands {
-    /// Crack the aspects into its base aspects. Used to descript the base elements of a Node. 
+    /// Crack the aspects into its base aspects. Used to descript the base elements of a Node.
     /// the aspects array can be, for example a node with Sano*1, Aer*48, Ira*11 and Superbia*1,
     /// then it can be writen like this:
     ///  Sano Aer 48 Ira 11 Superbia

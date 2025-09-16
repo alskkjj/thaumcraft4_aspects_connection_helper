@@ -189,7 +189,7 @@ pub async fn calc_weight_single(dao: Arc<DAO>, ele: &ElementHandle) -> Result<f6
 }
 
 pub async fn crack_element_until_primary(dao: Arc<DAO>, ele: &ElementHandle) -> Result<HashMap<ElementHandle, usize>> {
-    let tree = constructing_tree(dao, ele).await?;
+    let tree = constructing_tree(dao.clone(), ele).await?;
     let mut ret = HashMap::new();
     tree.nodes().filter(|a| {
         !a.has_children() 
@@ -201,6 +201,18 @@ pub async fn crack_element_until_primary(dao: Arc<DAO>, ele: &ElementHandle) -> 
             ret.insert(a.value().clone(), 1);
         }
     });
+
+    let primal_elements =
+        dao.get_primary_elements().await.context(DatabaseSnafu)?
+        .into_iter().map(|a| {
+            (a, 0usize)
+        }).collect::<HashMap<ElementHandle, usize>>();
+
+    for primary in primal_elements {
+        if !ret.contains_key(&primary.0) {
+            ret.insert(primary.0, primary.1);
+        }
+    }
 
     Ok(ret)
 }
